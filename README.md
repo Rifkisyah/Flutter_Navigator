@@ -1,16 +1,15 @@
 # Flutter Navigator Example
 
-A new Flutter project.
+Tugas 5 Praktikum Mobile
 
-## Getting Started
+## Demo
 
-This project is a starting point for a Flutter application.
+# list produk
+![demo_1.png](assets/demo_1.png)
 
-A few resources to get you started if this is your first Flutter project:
+![demo_2.png](assets/demo_2.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# detail produk
+![demo_3.png](assets/demo_3.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![demo_4.png](assets/demo_4.png)
