@@ -27,45 +27,92 @@ class ListProduk extends StatelessWidget {
     },
   ];
 
+  final List<Map<String, String>> handheldProducts = [
+    {
+      "nama": "Asus ROG Ally",
+      "image": "../assets/rog_ally.jpg",
+    },
+    {
+      "nama": "Steam Deck",
+      "image": "../assets/steam_deck.jpg",
+    },
+    {
+      "nama": "Nintendo Switch",
+      "image": "../assets/nitendo_switch.jpg",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text(
-          'Laptop Gaming Entry Level',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          'Daftar Produk',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurpleAccent),
         ),
         centerTitle: true,
         elevation: 2,
-        backgroundColor: Colors.deepPurpleAccent,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        itemCount: laptopProducts.length,
-        itemBuilder: (context, index) {
-          final product = laptopProducts[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(16),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailProduk(productId: index),
-                  ),
-                );
-              },
-              child: Card(
-                elevation: 4,
-                shadowColor: Colors.black26,
-                shape: RoundedRectangleBorder(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildProductList(context, 'Laptop Gaming Entry Level', laptopProducts),
+            const SizedBox(height: 24),
+            _buildProductList(context, 'Handheld Gaming', handheldProducts),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProductList(BuildContext context, String title, List<Map<String, String>> products) {
+    return Card(
+      elevation: 4,
+      shadowColor: Colors.black26,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 20),
+            width: double.infinity,
+            height: 50,
+            color: Colors.deepPurpleAccent,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(12),
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              final product = products[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: InkWell(
                   borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailProduk(category: title, productId: index),
+                      ),
+                    );
+                  },
                   child: Row(
                     children: [
                       ClipRRect(
@@ -78,7 +125,6 @@ class ListProduk extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 16),
-
                       Expanded(
                         child: Text(
                           product['nama']!,
@@ -89,16 +135,15 @@ class ListProduk extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       const Icon(Icons.arrow_forward_ios,
                           color: Colors.grey, size: 18),
                     ],
                   ),
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ],
       ),
     );
   }
